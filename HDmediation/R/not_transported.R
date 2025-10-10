@@ -46,7 +46,7 @@ not_transported <- function(data, A, W, Z, M, Y, cens,
 
         ipwy <- ((A == aprime) / gg[, gl("g({aprime}|w)")])*ipcw_ap
         density <- ipwy * hm / mean(ipwy * hm) # return this
-        density_trimmed <- pmin(density, quantile(density, 0.999)) # trim to the 99th percentile
+        density_trimmed <- pmin(density, quantile(density, 0.975)) # trim to the 99th percentile
       
         if (partial_tmle) {
             fit <- glm(Y ~ 1, offset = qlogis(bb[, gl("b({aprime},Z,M,W)")]), family = "binomial",
